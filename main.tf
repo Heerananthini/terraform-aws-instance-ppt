@@ -10,8 +10,11 @@ module "vpc-ppt" {
 resource "aws_instance" "web" {
   ami               = var.ami
   instance_type     = var.instance_type
-   subnet_id = vpc-ppt.subnet_id
+  subnet_id = module.vpc-ppt.subnet_id
   tags              = {
      "Name" = "web"
   }
+  depends_on = [
+    module.vpc-ppt
+  ]
 }
